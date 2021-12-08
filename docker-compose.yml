@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+    doame-web:
+      image: node:14
+      networks:
+        - doame_driver
+      ports:
+        - 3000:3000
+      command: yarn start
+      working_dir: /app
+      stdin_open: true
+      volumes:
+        - ./doame-front:/app
+    database:
+        image: postgres
+        container_name: postgres_database
+        networks:
+            - doame_driver
+        restart: always
+        ports:
+            - 5432:5432
+        environment: 
+            - POSTGRES_USER=docker
+            - POSTGRES_PASSWORD=doame
+            - POSTGRES_DB=doame
+        volumes:
+            - pgdata:/data/postgres
+    doame:
+        image: node:14
+        working_dir: /app
+        command: yarn dev
+        networks:
+            - doame_driver
+        ports: 
+            - 3333:3333
+        volumes:
+            - ./doame-api:/app
+        depends_on: 
+            - database
+
+
+    
+networks:
+  doame_driver:
+
+
+volumes: 
+    pgdata:
+        driver: local
