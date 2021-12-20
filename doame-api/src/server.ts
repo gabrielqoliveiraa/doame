@@ -7,7 +7,7 @@ import * as db from './queries'
 const app = express()
 
 app.use(express.json())
-
+app.use(express.urlencoded())
 
 app.use(
     (err: Error, request: Request, response: Response, next: NextFunction) => {
