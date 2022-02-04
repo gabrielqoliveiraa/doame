@@ -1,5 +1,7 @@
 function App() {
-  return <div className="App">Hello World Doa.me!</div>;
+  return (
+    <div>hello world!</div>
+  )
 }
 
 export default App;
