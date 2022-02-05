@@ -1,0 +1,21 @@
+.AbrirPedido button{
+    background: #00DF6D;
+    color: #fff;
+    border-style: none;
+    height: 2em;
+    width: 25%;
+    min-width: max-content;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    position: fixed;
+    top: 30px;
+    right: 35px;
+    z-index: 100;
+}
+
+.AbrirPedido button:hover{
+    background: #009247;
+    color: #fff;
+    text-shadow: #000;
+}
