@@ -1,10 +1,10 @@
 /* eslint-disable consistent-return */
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 import { DeleteUserService } from '../../services/Users/DeleteUserService'
 
 export class DeleteUserController {
-  async handle(request: Request, response: Response, next) {
+  async handle(request: Request, response: Response, next: NextFunction) {
     const { id } = request.params
 
     const service = new DeleteUserService()
