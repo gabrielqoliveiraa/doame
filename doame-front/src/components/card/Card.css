@@ -1,0 +1,66 @@
+.card{
+    background: #FFFFFF;
+    padding: 15px;
+    width: 25em;
+    height: max-content;
+    border-radius: 10px;
+    margin-bottom: 1em;
+}
+
+
+/* sobre o pedido */
+.detalhes{
+    margin-bottom: 1em;
+}
+.detalhes ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+.card hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.detalhes ul li{
+    margin: 0;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.detalhes ul li svg{
+    font-size: larger;    
+    color: red;
+}
+    
+/* User */
+.nome{
+    padding: 0;
+    margin: 0;
+}
+.usuario{
+    display: flex;
+    height: 50px;
+}
+
+/* foto de perfil: */
+.profile svg{
+    color: gray;
+    font-size: 3em;
+    margin-right: 15px;
+}
+.profile img{
+    background-color: #000;
+    width: 3.1em;
+    /* width: 50px;  */
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.nome_endereco{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
