@@ -1,0 +1,34 @@
+.navbar{
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 3.13em;
+    width: 3%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+}
+
+.navbar ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar ul li svg{
+    /* espacamento */
+    margin-top: .5em;
+    margin-bottom: .5em;
+
+    color: rgba(175, 175, 175, 1);
+    font-size: 30px;    
+    transition: .3s;
+}
+
+.navbar ul li svg:hover{
+    color:#EF233C;
+}
+

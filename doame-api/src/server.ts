@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express, { NextFunction, Request, Response } from 'express'
 import { AppError } from './errors/AppErrors'
-import routes from './routes'
 
 import 'express-async-errors'
 
 import './database'
+import router from './routes'
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded())
 
-app.use(routes)
+app.use(router)
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
