@@ -1,7 +1,12 @@
-import { AppRoutes } from '../routes';
+import { ThemeProviderContainer } from './components/Providers/Theme';
+import { AppRoutes } from './routes';
+import { GlobalStyle } from './styles/global';
 
-function App() {
-  return <AppRoutes />;
+export function App() {
+  return (
+    <ThemeProviderContainer>
+      <AppRoutes />
+      <GlobalStyle />
+    </ThemeProviderContainer>
+  );
 }
-
-export default App;
