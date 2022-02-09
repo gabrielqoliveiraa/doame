@@ -2,28 +2,28 @@ import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { User } from './User'
 
-@Entity('pedidos')
-export class Pedido {
+@Entity('requests')
+export class Requests {
   @PrimaryColumn()
   id: string
 
   @Column()
-  descricao: string
+  description: string
 
   @Column()
-  tipo_sangue: string
+  bloodType: string
 
   @Column()
-  quantidade_bolsas: number
+  bagQuantity: number
 
   @Column()
-  contato: string
+  contact: string
 
   @Column()
-  user_id: string
+  userId: string
 
   @ManyToOne(() => User)
-  @JoinColumn({name: 'user_id'})
+  @JoinColumn({ name: 'userId' })
   user: User
 
   constructor() {

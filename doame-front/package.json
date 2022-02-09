@@ -2,17 +2,20 @@
   "name": "doame-front",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.25.0",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.34.14",
     "react-router-dom": "^6.2.1",
     "styled-components": "^5.3.3",
-    "vite-plugin-svgr": "^1.0.1"
+    "vite-plugin-svgr": "^1.0.1",
+    "zustand": "^3.6.9"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",

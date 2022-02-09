@@ -73,11 +73,10 @@ export const Footer = styled.footer`
     font-weight: bold;
     letter-spacing: 1.25px;
   }
-
   button:nth-child(2) {
     width: 140px;
     height: 36px;
-    background: ${(props) => props.theme.colors.darkBlue250};
+    background: ${(props) => props.theme.colors.redPrimary};
     font-size: 16px;
     line-height: 19px;
     font-weight: bold;
@@ -90,4 +89,15 @@ export const Footer = styled.footer`
 
 export const Body = styled.div`
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    & + input {
+      margin-top: 15px;
+    }
+  }
 `;

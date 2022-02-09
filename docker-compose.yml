@@ -7,7 +7,7 @@ services:
         - doame_driver
       ports:
         - 3000:3000
-      command: yarn start
+      command: yarn dev
       working_dir: /app
       stdin_open: true
       volumes:
