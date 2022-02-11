@@ -4,12 +4,12 @@ import { UpdatePedidoService } from "services/Pedidos/UpdatePedidoService";
 export class UpdatePedidoController{
     async handle(request: Request, response: Response, next: NextFunction){
         const { id } = request.params
-        const { descricao, tipo_sangue, quantidade_bolsas, contato } = request.body
+        const { description, bloodType, bagQuantity, contact } = request.body
 
         const service = new UpdatePedidoService()
 
         try{
-            const result = await service.execute({id, descricao, tipo_sangue, quantidade_bolsas, contato})
+            const result = await service.execute({id, description, bloodType, bagQuantity, contact})
             return response.json(result)
         } catch(err){
             next(err)

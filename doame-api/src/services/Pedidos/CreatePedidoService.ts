@@ -1,16 +1,16 @@
 import { PedidosRepositories } from "repositories/PedidosRespositoriesService";
 import { UserRepositories } from "repositories/UserRepositoriesService";
-import { Pedido } from '../../entities/Pedido'
+import { Requests } from '../../entities/Pedido'
 import { AppError } from '../../errors/AppErrors'
 
 type PedidoRequest = {
-    descricao: string,
-    tipo_sangue: string,
-    quantidade_bolsas: number,
-    contato: string,
-    user_id: string
+    description: string,
+    bloodType: string,
+    bagQuantity: number,
+    contact: string,
+    userId: string
 }
-
+Request
  export class CreatePedidoService{
     private pedidosRepositories: PedidosRepositories
     private userRepositories: UserRepositories
@@ -20,14 +20,14 @@ type PedidoRequest = {
          this.userRepositories = new UserRepositories()
      }
 
-     async execute({user_id, descricao, tipo_sangue, quantidade_bolsas, contato}: PedidoRequest) : Promise<Pedido | Error>{
-        const user = await this.userRepositories.findUserByID(user_id)
+     async execute({userId, description, bloodType, bagQuantity, contact}: PedidoRequest) : Promise<Requests | Error>{
+        const user = await this.userRepositories.findUserByID(userId)
 
         if(!user){
             throw new AppError("Usuário não existe", 409)
         }
 
-        const pedidoCriado = this.pedidosRepositories.createPedido({user_id, descricao, tipo_sangue, quantidade_bolsas, contato})
+        const pedidoCriado = this.pedidosRepositories.createPedido({userId, description, bloodType, bagQuantity, contact})
 
         if(!pedidoCriado){
             throw new AppError("Pedido não criado", 500)

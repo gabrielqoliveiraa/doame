@@ -1,34 +1,34 @@
-import { Pedido } from 'entities/Pedido'
+import { Requests } from 'entities/Pedido'
 import { getRepository, Repository } from 'typeorm'
 
 
 export class PedidosRepositories{
-    private repositories: Repository<Pedido>
+    private repositories: Repository<Requests>
 
     constructor(){
-        this.repositories = getRepository(Pedido)
+        this.repositories = getRepository(Requests)
     }
 
-    async findPedidoByID(id: string) : Promise<Pedido>{
+    async findPedidoByID(id: string) : Promise<Requests>{
         const pedido = this.repositories.findOne({id})
         return pedido
     }
 
-    async findAllPedidos() : Promise<Pedido[]> {
+    async findAllPedidos() : Promise<Requests[]> {
         return await this.repositories.find({relations: ['user']})
     }
 
-    async createPedido({user_id, descricao, tipo_sangue, quantidade_bolsas, contato}) : Promise<Pedido>{
-        const pedido = this.repositories.create({user_id, descricao, tipo_sangue, quantidade_bolsas, contato})
+    async createPedido({userId, description, bloodType, bagQuantity, contact}) : Promise<Requests>{
+        const pedido = this.repositories.create({userId, description, bloodType, bagQuantity, contact})
         return this.repositories.save(pedido)
     }
 
-    async updatePedido({id, descricao, tipo_sangue, quantidade_bolsas, contato}) : Promise<Pedido>{
-        const pedido = await this.repositories.update({id}, {descricao, tipo_sangue, quantidade_bolsas, contato})
+    async updatePedido({id, description, bloodType, bagQuantity, contact}) : Promise<Requests>{
+        const pedido = await this.repositories.update({id}, {description, bloodType, bagQuantity, contact})
         return this.repositories.findOne(id)
     }
 
-    async deletePedidoByID(id: string): Promise<Pedido>{
+    async deletePedidoByID(id: string): Promise<Requests>{
         const pedido = await this.repositories.findOne({id})
         await this.repositories.delete(pedido)
         return pedido

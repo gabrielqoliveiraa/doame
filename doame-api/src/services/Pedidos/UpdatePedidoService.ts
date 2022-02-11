@@ -3,10 +3,10 @@ import { PedidosRepositories } from "repositories/PedidosRespositoriesService";
 
 type PedidoUpdateRequest = {
     id: string,
-    descricao: string,
-    tipo_sangue: string,
-    quantidade_bolsas: number,
-    contato: string
+    description: string,
+    bloodType: string,
+    bagQuantity: number,
+    contact: string
 }
 
 export class UpdatePedidoService{
@@ -16,15 +16,15 @@ export class UpdatePedidoService{
         this.pedidosRepositories = new PedidosRepositories()
     }
     
-    async execute({id, descricao, tipo_sangue, quantidade_bolsas, contato}: PedidoUpdateRequest){
+    async execute({id, description, bloodType, bagQuantity, contact}: PedidoUpdateRequest){
         const pedido = await this.pedidosRepositories.findPedidoByID(id)
 
         if(!pedido){
             throw new AppError("Pedido não existe")
         }
 
-        const pedidoUpdated = this.pedidosRepositories.updatePedido({id, descricao, tipo_sangue, quantidade_bolsas,
-        contato})
+        const pedidoUpdated = this.pedidosRepositories.updatePedido({id, description, bloodType, bagQuantity,
+        contact})
         
         if(!pedidoUpdated){
             throw new AppError("Pedido não atualizado")
