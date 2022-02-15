@@ -1,36 +1,74 @@
-import { Pedido } from 'entities/Pedido'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getRepository, Repository } from 'typeorm'
+import { Requests } from '../entities/Request'
 
+export class PedidosRepositories {
+  private repositories: Repository<Requests>
 
-export class PedidosRepositories{
-    private repositories: Repository<Pedido>
+  constructor() {
+    this.repositories = getRepository(Requests)
+  }
 
-    constructor(){
-        this.repositories = getRepository(Pedido)
-    }
+  async findPedidoByID(id: string): Promise<Requests> {
+    const pedido = this.repositories.findOne({ id })
+    return pedido
+  }
 
-    async findPedidoByID(id: string) : Promise<Pedido>{
-        const pedido = this.repositories.findOne({id})
-        return pedido
-    }
+  async findAllRequestByUserID(userId: string): Promise<Requests[]> {
+    const requests = this.repositories.find({
+      relations: ['user'],
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    })
+    return requests
+  }
 
-    async findAllPedidos() : Promise<Pedido[]> {
-        return await this.repositories.find({relations: ['user']})
-    }
+  async findAllPedidos(): Promise<Requests[]> {
+    const requests = await this.repositories.find({ relations: ['user'] })
+    return requests
+  }
 
-    async createPedido({user_id, descricao, tipo_sangue, quantidade_bolsas, contato}) : Promise<Pedido>{
-        const pedido = this.repositories.create({user_id, descricao, tipo_sangue, quantidade_bolsas, contato})
-        return this.repositories.save(pedido)
-    }
+  async createPedido({
+    userId,
+    description,
+    bloodType,
+    bagQuantity,
+    contact,
+    alreadyDonated,
+  }): Promise<Requests> {
+    const pedido = this.repositories.create({
+      userId,
+      description,
+      bloodType,
+      bagQuantity,
+      contact,
+      alreadyDonated,
+    })
+    return this.repositories.save(pedido)
+  }
 
-    async updatePedido({id, descricao, tipo_sangue, quantidade_bolsas, contato}) : Promise<Pedido>{
-        const pedido = await this.repositories.update({id}, {descricao, tipo_sangue, quantidade_bolsas, contato})
-        return this.repositories.findOne(id)
-    }
+  async updatePedido({
+    id,
+    description,
+    bloodType,
+    bagQuantity,
+    contact,
+    alreadyDonated,
+  }): Promise<Requests> {
+    await this.repositories.update(
+      { id },
+      { description, bloodType, bagQuantity, contact, alreadyDonated }
+    )
+    const request = this.repositories.findOne(id)
+    return request
+  }
 
-    async deletePedidoByID(id: string): Promise<Pedido>{
-        const pedido = await this.repositories.findOne({id})
-        await this.repositories.delete(pedido)
-        return pedido
-    }
+  async deletePedidoByID(id: string): Promise<Requests> {
+    const pedido = await this.repositories.findOne({ id })
+    await this.repositories.delete(pedido)
+    return pedido
+  }
 }

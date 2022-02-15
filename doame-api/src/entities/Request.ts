@@ -22,6 +22,9 @@ export class Requests {
   @Column()
   userId: string
 
+  @Column()
+  alreadyDonated: number
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'userId' })
   user: User

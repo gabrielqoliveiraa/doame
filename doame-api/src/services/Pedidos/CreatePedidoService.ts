@@ -1,38 +1,54 @@
-import { PedidosRepositories } from "repositories/PedidosRespositoriesService";
-import { UserRepositories } from "repositories/UserRepositoriesService";
-import { Pedido } from '../../entities/Pedido'
+import { PedidosRepositories } from '../../repositories/PedidosRespositoriesService'
+import { UserRepositories } from '../../repositories/UserRepositoriesService'
+import { Requests } from '../../entities/Request'
 import { AppError } from '../../errors/AppErrors'
 
 type PedidoRequest = {
-    descricao: string,
-    tipo_sangue: string,
-    quantidade_bolsas: number,
-    contato: string,
-    user_id: string
+  description: string
+  bloodType: string
+  bagQuantity: number
+  contact: string
+  userId: string
+  alreadyDonated: number
 }
 
- export class CreatePedidoService{
-    private pedidosRepositories: PedidosRepositories
-    private userRepositories: UserRepositories
+export class CreatePedidoService {
+  private pedidosRepositories: PedidosRepositories
 
-     constructor(){
-         this.pedidosRepositories = new PedidosRepositories()
-         this.userRepositories = new UserRepositories()
-     }
+  private userRepositories: UserRepositories
 
-     async execute({user_id, descricao, tipo_sangue, quantidade_bolsas, contato}: PedidoRequest) : Promise<Pedido | Error>{
-        const user = await this.userRepositories.findUserByID(user_id)
+  constructor() {
+    this.pedidosRepositories = new PedidosRepositories()
+    this.userRepositories = new UserRepositories()
+  }
 
-        if(!user){
-            throw new AppError("Usuário não existe", 409)
-        }
+  async execute({
+    userId,
+    description,
+    bloodType,
+    bagQuantity,
+    contact,
+    alreadyDonated,
+  }: PedidoRequest): Promise<Requests | Error> {
+    const user = await this.userRepositories.findUserByID(userId)
 
-        const pedidoCriado = this.pedidosRepositories.createPedido({user_id, descricao, tipo_sangue, quantidade_bolsas, contato})
+    if (!user) {
+      throw new AppError('Usuário não existe', 409)
+    }
 
-        if(!pedidoCriado){
-            throw new AppError("Pedido não criado", 500)
-        }
+    const pedidoCriado = this.pedidosRepositories.createPedido({
+      userId,
+      description,
+      bloodType,
+      bagQuantity,
+      contact,
+      alreadyDonated,
+    })
 
-        return pedidoCriado
-     }
- }
+    if (!pedidoCriado) {
+      throw new AppError('Pedido não criado', 500)
+    }
+
+    return pedidoCriado
+  }
+}

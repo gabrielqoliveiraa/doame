@@ -16,7 +16,7 @@ export class LoginUserService {
     this.userRepositories = new UserRepositories()
   }
 
-  async execute({ email, password }: UserRequest): Promise<boolean | Error> {
+  async execute({ email, password }: UserRequest): Promise<string | Error> {
     const user = await this.userRepositories.findUserByEmail(email)
 
     if (!user) {
@@ -26,6 +26,6 @@ export class LoginUserService {
     if (user.password !== password)
       throw new AppError('Password is not match!', 406)
 
-    return true
+    return user.id
   }
 }

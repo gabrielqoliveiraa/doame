@@ -29,6 +29,11 @@ export class CreatePedidos1644239673377 implements MigrationInterface {
             type: 'int',
           },
           {
+            name: 'alreadyDonated',
+            type: 'int',
+            isNullable: true,
+          },
+          {
             name: 'contact',
             type: 'varchar',
           },
