@@ -24,4 +24,11 @@ export const Container = styled.div`
   svg {
     cursor: pointer;
   }
+
+  p {
+    cursor: pointer;
+    position: absolute;
+    left: 10;
+    bottom: 15px;
+  }
 `;

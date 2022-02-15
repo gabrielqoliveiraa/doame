@@ -25,7 +25,9 @@ export default function LoginPage() {
     mutateUseLogin(
       { email, password },
       {
-        onSuccess: () => {
+        onSuccess: (userID: string) => {
+          localStorage.setItem('doame@login', userID);
+
           navigate('/home');
         },
         onError: () => {

@@ -5,9 +5,11 @@ import { ReactComponent as Drop } from '../../assets/drop.svg';
 import { ReactComponent as DropActive } from '../../assets/DropActive.svg';
 import { useState } from 'react';
 import { useIsActiveSideBar } from '../../store/useIsActiveSideBar';
+import { useNavigate } from 'react-router-dom';
 
 export const Sidebar = () => {
   const { isActive } = useIsActiveSideBar();
+  const navigate = useNavigate();
 
   const handleChangeActiveIcon = () => {
     if (isActive === 'home') {
@@ -15,6 +17,11 @@ export const Sidebar = () => {
     } else {
       useIsActiveSideBar.setState({ isActive: 'home' });
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('doame@login');
+    navigate('/');
   };
 
   return (
@@ -29,6 +36,7 @@ export const Sidebar = () => {
       ) : (
         <Drop onClick={handleChangeActiveIcon} />
       )}
+      <p onClick={handleLogout}>SAIR</p>
     </Container>
   );
 };
